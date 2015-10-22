@@ -147,6 +147,7 @@ function count_auth_users($auth)
 	$auth = intval($auth);
 
 	if ($auth === 1) {
+
 		$qry = "SELECT COUNT(*) FROM user WHERE password != '{$auth_ids[1]}'";
 		for ($i = 2; $i <= count($auth_ids); $i++) {
 			$qry .= " and password != '{$auth_ids[$i]}'";
@@ -280,6 +281,9 @@ email (LDAP attribute: mail)
 ****************************************************************/
 function auth_user_login($auth, $test_username, $test_password, $settings)
 {
+
+
+
 	global $mysqlMainDb, $webDir;
     $testauth = false;
     switch($auth) {
@@ -467,6 +471,7 @@ function auth_user_login($auth, $test_username, $test_password, $settings)
 			}
 			break;
     }
+
     return $testauth;
 }
 
@@ -628,6 +633,7 @@ function process_login()
                $auth_ids, $inactive_uid, $langTooManyFails;
 
 	if (isset($_POST['uname'])) {
+
 		$posted_uname = autounquote(canonicalize_whitespace($_POST['uname']));
 	} else {
 		$posted_uname = '';
@@ -1035,12 +1041,7 @@ function increaseLoginFailure()
         return;
     
     $ip = $_SERVER['REMOTE_ADDR'];
-    $r = db_query("SELECT 1 FROM login_failure WHERE ip = '". $ip ."'");
     
-    if (mysql_num_rows($r) > 0 )
-    	db_query("UPDATE login_failure SET count = count + 1, last_fail = CURRENT_TIMESTAMP WHERE ip = '". $ip ."'");
-    else
-    	db_query("INSERT INTO login_failure (id, ip, count, last_fail) VALUES (NULL, '". $ip ."', 1, CURRENT_TIMESTAMP)");
 }
 
 function resetLoginFailure()

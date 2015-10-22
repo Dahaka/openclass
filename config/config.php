@@ -4,7 +4,7 @@
  * Automatically created by install on 2015-10-21 23:08
  * ======================================================== */
 
-$urlServer = 'http://176.92.99.52:8080/xampp/eclass/';
+$urlServer = 'http://localhost:80/xampp/eclass/';
 $urlAppend = '/xampp/eclass';
 $webDir    = 'C:/xampp/htdocs/xampp/eclass/';
 
